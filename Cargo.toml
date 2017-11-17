@@ -10,3 +10,6 @@ path = "src/lib.rs"
 [[bin]]
 name = "tictactoe"
 path = "src/main.rs"
+
+[dependencies]
+conrod = "0.56.0"
