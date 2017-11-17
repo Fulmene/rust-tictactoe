@@ -3,4 +3,10 @@ name = "tictactoe"
 version = "0.1.0"
 authors = ["Ada Joule <ada.fulmina@gmail.com>"]
 
-[dependencies]
+[lib]
+name = "tictactoe_lib"
+path = "src/lib.rs"
+
+[[bin]]
+name = "tictactoe"
+path = "src/main.rs"
