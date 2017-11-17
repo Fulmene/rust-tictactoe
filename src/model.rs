@@ -13,11 +13,11 @@ impl Game {
         }
     }
 
-    pub fn play(&mut self, row: usize, column: usize) -> Option<Player> {
-        if let None = self.board.state[row][column] {
-            self.board.state[row][column] = Some(self.turn_player);
+    pub fn play(&mut self, position: Position) -> Option<Player> {
+        if let None = self.board.state[position.row][position.column] {
+            self.board.state[position.row][position.column] = Some(self.turn_player);
             self.turn_player = self.turn_player.other();
-            self.board.state[row][column]
+            self.board.state[position.row][position.column]
         }
         else {
             None
@@ -28,6 +28,20 @@ impl Game {
 // ----------- Board and Line ------------ //
 
 pub const BOARD_SIZE: usize = 3;
+
+pub struct Position {
+    row: usize,
+    column: usize,
+}
+
+impl Position {
+    pub fn new(row: usize, column: usize) -> Position {
+        if row >= BOARD_SIZE || column >= BOARD_SIZE {
+            panic!("Invalid position: BOARD_SIZE is {} but position is ({}, {})", BOARD_SIZE, row, column);
+        }
+        Position { row, column }
+    }
+}
 
 struct Board {
     state: [[Option<Player>; BOARD_SIZE]; BOARD_SIZE],
