@@ -39,14 +39,14 @@ pub enum GameResult {
 }
 
 impl Player {
-    fn get_other(self) -> Player {
+    fn other(self) -> Player {
         match self {
             Player::P1 => Player::P2,
             Player::P2 => Player::P1,
         }
     }
 
-    fn get_win_result(self) -> GameResult {
+    fn win_result(self) -> GameResult {
         match self {
             Player::P1 => GameResult::P1Wins,
             Player::P2 => GameResult::P2Wins,
