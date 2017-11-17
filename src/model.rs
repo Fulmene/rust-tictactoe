@@ -5,6 +5,26 @@ pub struct Game {
     turn_player: Player,
 }
 
+impl Game {
+    pub fn new() -> Game {
+        Game {
+            board: Board::new(),
+            turn_player: Player::P1,
+        }
+    }
+
+    pub fn play(&mut self, row: usize, column: usize) -> Option<Player> {
+        if let None = self.board.state[row][column] {
+            self.board.state[row][column] = Some(self.turn_player);
+            self.turn_player = self.turn_player.other();
+            self.board.state[row][column]
+        }
+        else {
+            None
+        }
+    }
+}
+
 // ----------- Board and Line ------------ //
 
 pub const BOARD_SIZE: usize = 3;
