@@ -14,7 +14,7 @@ struct Board {
 }
 
 impl Board {
-    fn empty_board() -> Board {
+    fn new() -> Board {
         Board { state: [[None; BOARD_SIZE]; BOARD_SIZE] }
     }
 }
