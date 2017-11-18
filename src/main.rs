@@ -14,7 +14,7 @@ fn main() {
         print_board(&board_view);
 
         println!("The next player is {}.", player_symbol(game.turn_player()));
-        println!("Choose a square (row, column):");
+        println!("Choose a square [row column]:");
         let mut position = String::new();
         std::io::stdin().read_line(&mut position).expect("Failed to read line");
         let mut position = position.trim().split_whitespace().map(|p| p.parse());
