@@ -55,6 +55,14 @@ impl Position {
         }
         Position { row, column }
     }
+
+    pub fn row(&self) -> usize {
+        self.row
+    }
+
+    pub fn column(&self) -> usize {
+        self.column
+    }
 }
 
 struct Board {
@@ -128,6 +136,16 @@ impl Player {
         match self {
             Player::P1 => GameResult::P1Wins,
             Player::P2 => GameResult::P2Wins,
+        }
+    }
+}
+
+impl GameResult {
+    pub fn win_player(self) -> Option<Player> {
+        match self {
+            GameResult::P1Wins => Some(Player::P1),
+            GameResult::P2Wins => Some(Player::P2),
+            _ => None,
         }
     }
 }
