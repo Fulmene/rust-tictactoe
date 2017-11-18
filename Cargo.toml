@@ -3,13 +3,6 @@ name = "tictactoe"
 version = "0.1.0"
 authors = ["Ada Joule <ada.fulmina@gmail.com>"]
 
-[lib]
-name = "tictactoe_lib"
-path = "src/lib.rs"
-
-[[bin]]
-name = "tictactoe"
-path = "src/main.rs"
-
 [dependencies]
 conrod = "0.56.0"
+tictactoe_lib = { version = "0.1.0", path = "./lib/tictactoe" }

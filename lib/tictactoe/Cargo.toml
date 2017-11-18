@@ -1,0 +1,6 @@
+[package]
+name = "tictactoe_lib"
+version = "0.1.0"
+authors = ["Ada Joule <ada.fulmina@gmail.com>"]
+
+[dependencies]
