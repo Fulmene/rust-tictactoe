@@ -19,7 +19,14 @@ fn main() {
         let mut position = String::new();
         std::io::stdin().read_line(&mut position).expect("Failed to read line");
         // TODO parse position
-        let position = Position::new(0, 0);
+        let mut position = position.trim().split_whitespace().map(|p| p.parse());
+        let position: Position = match (position.next(), position.next()) {
+            (Some(Ok(r)), Some(Ok(c))) => Position::new(r, c),
+            _ => { 
+                println!("Cannot parse position.");
+                continue;
+            },
+        };
 
         match game.play(position) {
             Some(p) => {
@@ -28,10 +35,12 @@ fn main() {
 
                 match game.result(position) {
                     Some(GameResult::Draw) => {
+                        print_board(&board_view);
                         println!("The game is a draw.");
                         break;
                     }
                     Some(r) => {
+                        print_board(&board_view);
                         println!("{} wins.", player_symbol(r.win_player().unwrap()));
                         break;
                     }
