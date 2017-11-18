@@ -29,7 +29,7 @@ impl Game {
             .map(|l| l.all_same_player())
             .fold(None, |a, p| a.or(p)) {
                 Some(p) => Some(p.win_result()),
-                None => None
+                None => if self.board.full() { Some(GameResult::Draw) } else { None },
             }
     }
 
@@ -82,6 +82,13 @@ impl Board {
         let diagonal = Line::new_from_vec(self.state.iter().enumerate().map(|(i, r)| r[i]).collect());
         let antidiagonal = Line::new_from_vec(self.state.iter().enumerate().map(|(i, r)| r[BOARD_SIZE-1-i]).collect());
         [row, column, diagonal, antidiagonal]
+    }
+
+    fn full(&self) -> bool {
+        match self.state.iter().flat_map(|r| r.iter()).fold(Some(Player::P1), |p, s| p.and(*s)) {
+            Some(_) => true,
+            None => false,
+        }
     }
 }
 
