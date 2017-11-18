@@ -1,10 +1,10 @@
-extern crate tictactoe_lib;
+extern crate tictactoe;
 
-use tictactoe_lib::model::Game;
-use tictactoe_lib::model::Position;
-use tictactoe_lib::model::Player;
-use tictactoe_lib::model::GameResult;
-use tictactoe_lib::model::BOARD_SIZE;
+use tictactoe::model::Game;
+use tictactoe::model::Position;
+use tictactoe::model::Player;
+use tictactoe::model::GameResult;
+use tictactoe::model::BOARD_SIZE;
 
 fn main() {
     let mut game = Game::new();
