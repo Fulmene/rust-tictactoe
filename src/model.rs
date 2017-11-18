@@ -32,6 +32,10 @@ impl Game {
                 None => None
             }
     }
+
+    pub fn turn_player(&self) -> Player {
+        self.turn_player
+    }
 }
 
 // ----------- Board and Line ------------ //
@@ -85,10 +89,6 @@ impl Line {
             state[i] = line[i];
         }
         Line { state }
-    }
-
-    fn new_from_slices(sublines: &[&[Option<Player>]]) -> Line {
-        Line::new_from_vec(sublines.concat())
     }
 
     fn all_same_player(&self) -> Option<Player> {
