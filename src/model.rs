@@ -29,6 +29,7 @@ impl Game {
 
 pub const BOARD_SIZE: usize = 3;
 
+#[derive(Copy, Clone)]
 pub struct Position {
     row: usize,
     column: usize,
@@ -51,10 +52,34 @@ impl Board {
     fn new() -> Board {
         Board { state: [[None; BOARD_SIZE]; BOARD_SIZE] }
     }
+
+    fn lines_of_pos(&self, pos: Position) -> [Line; 4] {
+        let row = Line { state: self.state[pos.row] };
+        let column = Line::new_from_vec(self.state.iter().map(|r| r[pos.column]).collect());
+        let diagonal = Line::new_from_vec(self.state.iter().enumerate().map(|(i, r)| r[i]).collect());
+        let antidiagonal = Line::new_from_vec(self.state.iter().enumerate().map(|(i, r)| r[BOARD_SIZE-1-i]).collect());
+        [row, column, diagonal, antidiagonal]
+    }
 }
 
 struct Line {
     state: [Option<Player>; BOARD_SIZE],
+}
+
+impl Line {
+    fn new_from_vec(line: Vec<Option<Player>>) -> Line {
+        if line.len() != BOARD_SIZE {
+            panic!("Total size of line mismatch: BOARD_SIZE is {} but total size is {}", BOARD_SIZE, line.len());
+        }
+        let mut state: [Option<Player>; 3] = [None; 3];
+        for i in 0..BOARD_SIZE {
+            state[i] = line[i];
+        }
+        Line { state }
+    }
+    fn new_from_slices(sublines: &[&[Option<Player>]]) -> Line {
+        Line::new_from_vec(sublines.concat())
+    }
 }
 
 // -------- Player and GameResult -------- //
