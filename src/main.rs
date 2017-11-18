@@ -11,7 +11,6 @@ fn main() {
     let mut board_view = [[' '; BOARD_SIZE]; BOARD_SIZE];
 
     loop {
-        println!("Current board state:");
         print_board(&board_view);
 
         println!("The next player is {}.", player_symbol(game.turn_player()));
@@ -21,7 +20,13 @@ fn main() {
         // TODO parse position
         let mut position = position.trim().split_whitespace().map(|p| p.parse());
         let position: Position = match (position.next(), position.next()) {
-            (Some(Ok(r)), Some(Ok(c))) => Position::new(r, c),
+            (Some(Ok(r)), Some(Ok(c))) => match Position::new(r, c) {
+                Ok(p) => p,
+                Err(s) => {
+                    println!("{}", s);
+                    continue;
+                },
+            },
             _ => { 
                 println!("Cannot parse position.");
                 continue;
@@ -53,6 +58,7 @@ fn main() {
 }
 
 fn print_board(board_view: &[[char; BOARD_SIZE]; BOARD_SIZE]) {
+    println!("Current board state:");
         print!("+");
         for _ in 0..BOARD_SIZE {
             print!("---+");

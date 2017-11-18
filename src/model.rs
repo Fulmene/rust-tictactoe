@@ -49,11 +49,13 @@ pub struct Position {
 }
 
 impl Position {
-    pub fn new(row: usize, column: usize) -> Position {
+    pub fn new(row: usize, column: usize) -> Result<Position, String> {
         if row >= BOARD_SIZE || column >= BOARD_SIZE {
-            panic!("Invalid position: BOARD_SIZE is {} but position is ({}, {})", BOARD_SIZE, row, column);
+            Err(format!("Invalid position: BOARD_SIZE is {} but position is ({}, {})", BOARD_SIZE, row, column))
         }
-        Position { row, column }
+        else {
+            Ok(Position { row, column })
+        }
     }
 
     pub fn row(&self) -> usize {
