@@ -77,14 +77,24 @@ impl Line {
         }
         Line { state }
     }
+
     fn new_from_slices(sublines: &[&[Option<Player>]]) -> Line {
         Line::new_from_vec(sublines.concat())
+    }
+
+    fn all_same_player(&self) -> Option<Player> {
+        if self.state.iter().all(|p| *p == self.state[0]) {
+            self.state[0]
+        }
+        else {
+            None
+        }
     }
 }
 
 // -------- Player and GameResult -------- //
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Eq, PartialEq)]
 pub enum Player {
     P1,
     P2,
