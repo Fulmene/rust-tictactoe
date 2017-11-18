@@ -18,8 +18,8 @@ fn main() {
         let mut position = String::new();
         std::io::stdin().read_line(&mut position).expect("Failed to read line");
         let mut position = position.trim().split_whitespace().map(|p| p.parse());
-        let position: Position = match (position.next(), position.next()) {
-            (Some(Ok(r)), Some(Ok(c))) => match Position::new(r, c) {
+        let position: Position = match (position.next(), position.next(), position.next()) {
+            (Some(Ok(r)), Some(Ok(c)), None) => match Position::new(r, c) {
                 Ok(p) => p,
                 Err(s) => {
                     println!("{}", s);
