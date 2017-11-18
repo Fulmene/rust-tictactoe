@@ -23,6 +23,15 @@ impl Game {
             None
         }
     }
+
+    pub fn result(&self, last_move: Position) -> Option<GameResult> {
+        match self.board.lines_of_pos(last_move).iter()
+            .map(|l| l.all_same_player())
+            .fold(None, |a, p| a.or(p)) {
+                Some(p) => Some(p.win_result()),
+                None => None
+            }
+    }
 }
 
 // ----------- Board and Line ------------ //
