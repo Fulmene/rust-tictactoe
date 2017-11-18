@@ -1,0 +1,7 @@
+[package]
+name = "tictactoe_console"
+version = "0.1.0"
+authors = ["Ada Joule <ada.fulmina@gmail.com>"]
+
+[dependencies]
+tictactoe = { version = "0.1.0", path = "../../../lib/tictactoe" }
